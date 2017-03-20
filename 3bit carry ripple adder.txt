@@ -1,0 +1,21 @@
+module full_adder( input a, input b, input cin, output cout,output sum);
+    assign cout=a &b | a & cin | cin & b;
+    assign sum= a^ b ^ cin;
+    
+endmodule
+
+module top_module( 
+    input [2:0] a, b,
+    input cin,
+    output [2:0] cout,
+    output [2:0] sum );
+    reg c1, c2,c3;
+    reg o1,o2,o3;
+    full_adder instance1 (a[0],b[0],cin, c1, sum[0]);
+    full_adder instance2 (a[1],b[1],c1, c2, sum[1]);
+    full_adder instance3 (a[2],b[2],c2, c3, sum[2]);
+    assign cout[0]=c1;
+    assign cout[1]=c2;
+    assign cout[2]=c3;
+
+endmodule
